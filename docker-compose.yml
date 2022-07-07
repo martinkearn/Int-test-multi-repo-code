@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+
+  basicapi:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    ports:
+      - "9012:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
