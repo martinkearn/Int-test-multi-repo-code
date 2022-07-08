@@ -28,9 +28,6 @@ jobs:
     - name: Test Code Repo
       run: dotnet test  src/*.csproj --no-build --verbosity normal
       
-    - name: Run Code Repo in Docker Compose
-      run: docker compose up
-      
     - name: Checkout Test Repo
       uses: actions/checkout@v3
       with:
@@ -42,3 +39,12 @@ jobs:
       
     - name: Build Test Repo
       run: dotnet build Int-test-multi-repo-test/src/*.csproj --no-restore
+      
+    - name: Run Code Repo in Docker Compose
+      run: docker compose up -d
+       
+    - name: Test Test Repo
+      run: dotnet test Int-test-multi-repo-test/src/*.csproj --no-build --verbosity normal 
+      
+    - name: Stop Code Repo in Docker Compose
+      run: docker compose down
