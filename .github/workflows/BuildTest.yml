@@ -1,4 +1,4 @@
-name: .NET
+name: Build and Test
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
         path: Int-test-multi-repo-test
         
     - name: Restore dependencies for Test Repo
-      run: dotnet restore  Int-test-multi-repo-test/src/*.csproj
+      run: dotnet restore Int-test-multi-repo-test/src/*.csproj
       
     - name: Build Test Repo
       run: dotnet build Int-test-multi-repo-test/src/*.csproj --no-restore
