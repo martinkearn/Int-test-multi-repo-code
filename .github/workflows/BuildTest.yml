@@ -14,22 +14,28 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Checkout Test Repo
-      uses: actions/checkout@v3
-      with:
-        repository: martinkearn/Int-test-multi-repo-test
-        path: Int-test-multi-repo-test
-    
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
         
-    - name: Restore dependencies
+    - name: Restore dependencies for Code Repo
       run: dotnet restore  src/*.csproj
       
-    - name: Build
+    - name: Build Code Repo
       run: dotnet build src/*.csproj --no-restore
       
-    - name: Test
+    - name: Test Code Repo
       run: dotnet test  src/*.csproj --no-build --verbosity normal
+      
+    - name: Checkout Test Repo
+      uses: actions/checkout@v3
+      with:
+        repository: martinkearn/Int-test-multi-repo-test
+        path: Int-test-multi-repo-test
+        
+    - name: Restore dependencies for Test Repo
+      run: dotnet restore  Int-test-multi-repo-test/src/*.csproj
+      
+    - name: Build Test Repo
+      run: dotnet build Int-test-multi-repo-test/src/*.csproj --no-restore
