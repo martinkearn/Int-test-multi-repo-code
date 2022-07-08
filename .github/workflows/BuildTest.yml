@@ -8,7 +8,7 @@ on:
     
     
 env:
-  SutUriBase: "http://localhost:666"
+  SutUriBase: "http://localhost:9012"
 
 jobs:
   build:
